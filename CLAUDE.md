@@ -16,6 +16,7 @@ This is the central repository for the Marmalio World ecosystem. This repository
 - `npm install` — install dependencies (currently just `yaml`, used to parse `config/ecosystem.yaml` and idea files).
 - `npm run validate:ecosystem` — validate `config/ecosystem.yaml`: real YAML parse, required-section/type checks, duplicate-ID checks, kebab-case checks, QA bounds, and operating-model chain/responsibilities cross-checks. Exits non-zero on any issue.
 - `npm run validate:idea -- <path>` — run the research-market-validation preflight on one idea file (JSON or YAML). Prints a machine-readable readiness result; exits non-zero only on invalid input or a tool failure, never on a low readiness score.
+- `npm run brief:idea -- <path>` — turn a valid preflight result into a deterministic, prioritized action plan (evidence-gathering, evidence-verification, definition-gap, strengthening tasks). Plans only — never gathers or verifies evidence itself.
 - `npm test` — run all unit tests (`node --test`, using Node's built-in automatic test-file discovery) using Node's built-in test runner only.
 
 There is still no build or lint step beyond these. Update this file's Commands and directory-layout notes as new apps are added under `apps/`.

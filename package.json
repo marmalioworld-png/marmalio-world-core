@@ -6,6 +6,7 @@
   "scripts": {
     "validate:ecosystem": "node scripts/validate-ecosystem.js",
     "validate:idea": "node apps/research-market-validation/validate-idea.js",
+    "brief:idea": "node apps/research-market-validation/brief-idea.js",
     "test": "node --test"
   },
   "dependencies": {

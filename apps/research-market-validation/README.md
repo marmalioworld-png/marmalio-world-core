@@ -93,3 +93,70 @@ Five criteria (`problem_definition`, `audience_definition`, `evidence_coverage`,
 
 These bands are module-local constants, unrelated to the ecosystem-wide QA threshold in
 `config/ecosystem.yaml`'s `qa.min_score` (which governs publishing, not research readiness).
+
+## Research brief (`brief-idea.js`)
+
+Turns a valid `validate-idea.js` result into a deterministic, prioritized action plan. It is a
+**plan generator only** — it never gathers, fetches, or verifies evidence itself. The underlying
+preflight only confirms evidence was *declared*, never that it is real, current, or actually
+supports the claim; every declared evidence entry therefore gets its own verification task, not
+just a pass.
+
+### Usage
+
+```
+npm run brief:idea -- <path-to-idea.json-or-yaml>
+```
+
+Example: `npm run brief:idea -- apps/research-market-validation/examples/sample-idea-needs-work.json`
+
+Same input contract and exit-code semantics as `validate-idea.js` (invalid input is delegated to
+`evaluateIdea` unchanged, so a structurally broken idea fails the same way for both commands).
+
+### Output contract
+
+```jsonc
+{
+  "valid": true,
+  "idea_id": "...",
+  "module": "research-market-validation",
+  "artifact": "research-brief",
+  "schema_version": 1,
+  "based_on": { "readiness": "revise-input", "score_total": 49, "scale": 100 },
+  "action_plan": [
+    {
+      "id": "kebab-case-task-id",
+      "category": "evidence-gathering",        // | "evidence-verification" | "definition-gap" | "strengthening"
+      "priority": "high",                      // | "medium" | "low"
+      "assumption_id": "...",                  // present only for evidence-gathering
+      "evidence_id": "...",                    // present only for evidence-verification
+      "field": "problem.desired_outcome",      // present only for definition-gap
+      "action": "concise instruction",
+      "suggested_source_types": ["user-interview", "survey", "analytics-export", "expert-review"], // evidence-gathering only, fixed generic list
+      "completion_criteria": ["observable requirement", "..."]
+    }
+  ],
+  "summary": { "total": 7, "by_category": { "...": 0 }, "by_priority": { "high": 0, "medium": 0, "low": 0 } },
+  "limitations": ["... the four validate-idea.js limitations plus a fifth specific to this artifact ..."],
+  "policy": { "...": "same shape and live-read discipline as validate-idea.js" }
+}
+```
+
+Only the optional keys relevant to a task's category are present — never included as `null`.
+
+### Task categories
+
+- `evidence-gathering` (priority `high`) — one per assumption with zero declared evidence.
+- `evidence-verification` (priority `medium`) — one per declared evidence entry; asks the human
+  or agent to check source accessibility/identity, publication date or context, whether it
+  actually supports the claim, and to record any contradiction found. The module performs none
+  of these checks itself.
+- `definition-gap` (priority `medium`) — one per missing `problem.*`/`target_audience.*` field.
+- `strengthening` (priority `medium` or `low`) — optional improvements: fewer than two
+  `alternatives`, or a `target_channel` that isn't the ecosystem's primary channel.
+
+### Ordering
+
+Deterministic: priority (`high` → `medium` → `low`), then fixed category order
+(`evidence-gathering` → `evidence-verification` → `definition-gap` → `strengthening`), then the
+relevant input's declared order, then task `id` as a final tie-breaker.

@@ -1,0 +1,37 @@
+{
+  "id": "needs-work-loyalty-widget",
+  "kind": "product",
+  "title": "Shopify loyalty points widget",
+  "problem": {
+    "statement": "Sellers want a simple loyalty points widget."
+  },
+  "target_audience": {
+    "segment": "Small Shopify sellers."
+  },
+  "target_channel": "etsy",
+  "assumptions": [
+    {
+      "id": "loyalty-increases-repeat-purchases",
+      "claim": "Loyalty points increase repeat purchase rate."
+    },
+    {
+      "id": "no-code-setup-is-valued",
+      "claim": "Sellers value a no-code setup process."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "no-code-interviews-2026",
+      "claim": "Interviewed sellers said no-code setup was a top priority.",
+      "source_type": "user-interview",
+      "source_reference": "interview-notes-2026-08.docx",
+      "supports_assumption_ids": ["no-code-setup-is-valued"]
+    }
+  ],
+  "alternatives": [
+    {
+      "name": "Manual points spreadsheet tracking",
+      "difference": "No automation, error-prone."
+    }
+  ]
+}
