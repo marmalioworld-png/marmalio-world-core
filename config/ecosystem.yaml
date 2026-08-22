@@ -44,7 +44,7 @@ modules:
     status: planned
   - id: research-market-validation
     name: Research and market validation
-    status: planned
+    status: pilot
   - id: localization
     name: Localization
     status: planned
