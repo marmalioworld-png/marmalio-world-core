@@ -4,20 +4,21 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository status
 
-This is the central repository for the Marmalio World ecosystem. It is currently a scaffold: there is no application code, build system, package manifest, or test suite yet. The directory layout is:
+This is the central repository for the Marmalio World ecosystem. This repository now contains the machine-readable ecosystem core, its validator and CI gate, and the first functional research-readiness module. There is still no build or lint step. The directory layout is:
 
-- `apps/` — empty; intended home for future applications
+- `apps/research-market-validation/` — first functional module: a deterministic research-readiness preflight for one product/content idea (see its README.md). `apps/` otherwise empty; intended home for future applications.
 - `assets/` — empty; intended home for future static assets
-- `scripts/` — empty; intended home for future automation/tooling scripts
+- `scripts/` — the ecosystem configuration validator and its tests (`validate-ecosystem.js`, `validate-ecosystem.test.js`)
 - `docs/PROJECT_PLAN.md` — mission, business areas, and goals for the ecosystem
 
 ## Commands
 
-- `npm install` — install dependencies (currently just `yaml`, used to parse `config/ecosystem.yaml`).
+- `npm install` — install dependencies (currently just `yaml`, used to parse `config/ecosystem.yaml` and idea files).
 - `npm run validate:ecosystem` — validate `config/ecosystem.yaml`: real YAML parse, required-section/type checks, duplicate-ID checks, kebab-case checks, QA bounds, and operating-model chain/responsibilities cross-checks. Exits non-zero on any issue.
-- `npm test` — run the validator's unit tests (`node --test scripts/validate-ecosystem.test.js`) using Node's built-in test runner only.
+- `npm run validate:idea -- <path>` — run the research-market-validation preflight on one idea file (JSON or YAML). Prints a machine-readable readiness result; exits non-zero only on invalid input or a tool failure, never on a low readiness score.
+- `npm test` — run all unit tests (`node --test`, using Node's built-in automatic test-file discovery) using Node's built-in test runner only.
 
-There is still no application code or build/lint step — `scripts/validate-ecosystem.js` is the first piece of tooling in the repo. When the first app is added under `apps/`, update this file with its own commands.
+There is still no build or lint step beyond these. Update this file's Commands and directory-layout notes as new apps are added under `apps/`.
 
 ## Project context
 

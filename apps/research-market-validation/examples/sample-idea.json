@@ -1,0 +1,51 @@
+{
+  "id": "sample-budget-tracker-idea",
+  "kind": "product",
+  "title": "Budget-friendly Shopify inventory cost tracker",
+  "problem": {
+    "statement": "Small Shopify sellers struggle to track inventory costs without expensive tooling.",
+    "current_alternative": "Sellers currently track inventory costs manually in spreadsheets.",
+    "desired_outcome": "Sellers can see real-time cost and margin data without manual entry."
+  },
+  "target_audience": {
+    "segment": "Small independent Shopify store owners with 1-3 staff.",
+    "context": "Managing inventory alongside marketing, fulfillment, and customer support with no dedicated ops role."
+  },
+  "target_channel": "shopify",
+  "assumptions": [
+    {
+      "id": "budget-conscious-users-exist",
+      "claim": "A meaningful segment of the target audience is budget-conscious and price sensitive."
+    },
+    {
+      "id": "manual-process-is-painful",
+      "claim": "The current manual process is time-consuming enough that users would switch tools."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "survey-2026-pricing",
+      "claim": "68% of surveyed respondents ranked price as their top decision factor.",
+      "source_type": "survey",
+      "source_reference": "internal-survey-2026-08-marmalio-audience.pdf",
+      "supports_assumption_ids": ["budget-conscious-users-exist"]
+    },
+    {
+      "id": "support-ticket-analysis",
+      "claim": "Support tickets show recurring complaints about the manual process taking over an hour per week.",
+      "source_type": "support-ticket-analysis",
+      "source_reference": "internal-helpdesk-export-2026-07.csv",
+      "supports_assumption_ids": ["manual-process-is-painful"]
+    }
+  ],
+  "alternatives": [
+    {
+      "name": "Generic spreadsheet templates",
+      "difference": "Requires manual upkeep and offers no automation or validation."
+    },
+    {
+      "name": "Competitor X subscription tool",
+      "difference": "Covers similar ground but is priced significantly higher and lacks Shopify-specific workflows."
+    }
+  ]
+}
