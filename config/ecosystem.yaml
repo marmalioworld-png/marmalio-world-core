@@ -1,0 +1,115 @@
+# config/ecosystem.yaml
+# Single source of truth for the Marmalio World ecosystem.
+# Human-readable rationale lives in CLAUDE.md and docs/PROJECT_PLAN.md;
+# this file is the structured, queryable counterpart.
+
+version: 1
+
+operating_model:
+  chain:
+    - human
+    - chatgpt
+    - claude-code
+    - specialist-agents
+    - qa
+    - human-approval
+  responsibilities:
+    human: Sets intent and priorities; gives final approval on publishing, production, spending, destructive actions, and major architecture changes
+    chatgpt: Strategic manager and architect; sets direction, priorities, and high-level design decisions
+    claude_code: Primary implementation/execution layer; builds and maintains code and repository content
+    specialist_agents: Execute focused work within a role - research, product building, localization, compliance, qa
+    qa: Reviews all work before publishing
+
+modules:
+  - id: product-factory
+    name: Product Factory / Digital Product Microfactory
+    status: planned
+  - id: content-factory
+    name: Content Factory
+    status: planned
+  - id: content-intelligence
+    name: Content Intelligence / Faceless Growth Engine
+    status: planned
+  - id: micro-app-factory
+    name: Micro-App Factory / App Venture Lab
+    status: planned
+  - id: shopify-integration
+    name: Shopify integration
+    status: planned
+  - id: creative-generation-gateway
+    name: Creative Generation Gateway
+    status: planned
+  - id: tool-registry
+    name: Tool Registry
+    status: planned
+  - id: research-market-validation
+    name: Research and market validation
+    status: planned
+  - id: localization
+    name: Localization
+    status: planned
+  - id: compliance-qa
+    name: Compliance and QA
+    status: planned
+
+agent_roles:
+  - id: research
+    purpose: Market/product/competitor investigation
+  - id: product-builder
+    purpose: Turn validated ideas into shippable product work
+  - id: localization
+    purpose: Adapt content/products for other languages and markets
+  - id: compliance
+    purpose: Legal, platform-policy, and licensing checks
+  - id: qa
+    purpose: Quality assurance and review before publishing
+
+qa:
+  min_score: 85
+  scale: 100
+  mandatory_before_publish: true
+
+approval_required:
+  - publishing
+  - production-deployment
+  - spending
+  - destructive-actions
+  - major-architectural-change
+
+channels:
+  primary: shopify
+  expansion:
+    - amazon-kdp
+    - amazon-merch
+    - etsy
+    - gumroad
+    - lemon-squeezy
+    - social-platforms
+
+tools:
+  claude_ecosystem:
+    - id: claude-code
+      status: core-now
+    - id: claude-code-setup
+      status: core-now
+    - id: claude-mem
+      status: pilot
+    - id: task-observer
+      status: pilot
+    - id: book-to-skill
+      status: later-pilot
+    - id: omniroute
+      status: later
+  external_review_required:
+    - security
+    - licensing
+    - maintenance-status
+    - functional-duplication
+  preference: small-high-quality-toolset
+
+principles:
+  - work-incrementally
+  - inspect-before-major-implementation
+  - keep-docs-in-sync
+  - never-expose-secrets
+  - validate-external-claims-before-treating-as-fact
