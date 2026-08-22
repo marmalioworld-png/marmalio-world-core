@@ -11,7 +11,13 @@ This is the central repository for the Marmalio World ecosystem. It is currently
 - `scripts/` — empty; intended home for future automation/tooling scripts
 - `docs/PROJECT_PLAN.md` — mission, business areas, and goals for the ecosystem
 
-Since there is no code yet, there are no build, lint, or test commands to run. When the first app or script is added under `apps/` or `scripts/`, update this file with the actual commands (install, build, lint, test, run) discovered from its package manifest or config.
+## Commands
+
+- `npm install` — install dependencies (currently just `yaml`, used to parse `config/ecosystem.yaml`).
+- `npm run validate:ecosystem` — validate `config/ecosystem.yaml`: real YAML parse, required-section/type checks, duplicate-ID checks, kebab-case checks, QA bounds, and operating-model chain/responsibilities cross-checks. Exits non-zero on any issue.
+- `npm test` — run the validator's unit tests (`node --test scripts/validate-ecosystem.test.js`) using Node's built-in test runner only.
+
+There is still no application code or build/lint step — `scripts/validate-ecosystem.js` is the first piece of tooling in the repo. When the first app is added under `apps/`, update this file with its own commands.
 
 ## Project context
 

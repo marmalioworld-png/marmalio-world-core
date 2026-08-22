@@ -1,0 +1,13 @@
+{
+  "name": "marmalio-world-core",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Marmalio World ecosystem core — orchestration config and tooling.",
+  "scripts": {
+    "validate:ecosystem": "node scripts/validate-ecosystem.js",
+    "test": "node --test scripts/validate-ecosystem.test.js"
+  },
+  "dependencies": {
+    "yaml": "^2.9.0"
+  }
+}
