@@ -11,6 +11,22 @@ This is the central repository for the Marmalio World ecosystem. This repository
 - `scripts/` — the ecosystem configuration validator and its tests (`validate-ecosystem.js`, `validate-ecosystem.test.js`)
 - `docs/PROJECT_PLAN.md` — mission, business areas, and goals for the ecosystem
 
+## Business priority and product-delivery rules
+
+**Marmalio World exists to create and sell products.** This repository's tooling supports sales; it is not the product. This corrects execution priority — see `docs/PROJECT_PLAN.md`'s "Revenue-first execution directive" for full context. The technical foundation already built (the ecosystem core, its validator and CI gate, the research-market-validation pilot, `validate:idea`/`brief:idea`, and the test suite) stays in place and useful — it is just no longer where most new effort goes.
+
+- The first sellable products must launch during **September 2026**.
+- At least **80%** of execution time goes to product creation, offers, listings, publishing, marketing, and sales; at most **20%** to infrastructure, documentation, and automation.
+- Do not build another technical module — including anything new under `apps/` or a new entry in `config/ecosystem.yaml`'s `modules` — unless it directly helps create, publish, deliver, or sell a named product.
+- Work on one sellable product sprint at a time. A finished product outranks several unfinished concepts.
+- Every product sprint ends with final customer files, pricing, listing copy, cover/mockups, delivery instructions, QA, and launch materials — not only a plan.
+- **Shopify** is the main multi-industry storefront, starting with high-margin digital products (ebooks, guides, workbooks, templates, checklists, prompt packs, document packs; courses later). **Amazon KDP** and **Amazon Merch** are separate channels for adapted/printed and print-on-demand products respectively. Dropshipping via Shopify waits until demand, supplier quality, delivery time, returns, and margin are verified. AI tools, micro-apps, subscriptions, and SaaS are later opportunities, pursued only after real product sales and customer evidence exist.
+- The research-market-validation module (`validate:idea`, `brief:idea`) remains a reusable product-selection and evidence-planning tool — reuse it for future product candidates rather than rebuilding equivalent logic.
+- The A11y Evidence concept researched through that pilot was an external example only — not an approved first product, not the default direction.
+- Product publication, spending, paid advertising, account creation, and external communication still require explicit human approval (unchanged from the operating model below).
+- Do not assume any finished products or Virtual Studio assets already exist — inspect for actual files before assuming production has started.
+- Reports to the owner may be in Polish; repository documentation stays in this repository's existing language and style (English).
+
 ## Commands
 
 - `npm install` — install dependencies (currently just `yaml`, used to parse `config/ecosystem.yaml` and idea files).

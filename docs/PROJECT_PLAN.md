@@ -4,6 +4,34 @@
 
 Build a global ecosystem of digital products, AI tools, e-commerce, education, and automation under the Marmalio World brand — one umbrella ecosystem, not a set of unrelated projects, orchestrated from this core repository.
 
+## Revenue-first execution directive
+
+**Marmalio World exists to create and sell products.** The ecosystem — orchestration, tooling, automation — supports sales; building the ecosystem is not the final product. This directive corrects execution priority and takes precedence over the "build the core first" framing later in this document where the two conflict. It does not undo or discard the technical foundation already built — the machine-readable ecosystem core (`config/ecosystem.yaml`), its validator and CI gate, and the research-market-validation pilot with its `validate:idea`/`brief:idea` commands and test suite all remain in place and useful. It simply is no longer where most new effort goes.
+
+- **The first sellable products must be launched during September 2026.**
+- At least **80%** of execution time goes to product creation, offers, listings, publishing, marketing, and sales. At most **20%** goes to infrastructure, documentation, and automation.
+- Do not build another technical module unless it directly helps create, publish, deliver, or sell a named product.
+- Work on **one sellable product sprint at a time.** One finished product outranks several unfinished concepts.
+- Every product sprint must end with final customer files, pricing, listing copy, cover/mockups, delivery instructions, QA, and launch materials — not only a plan.
+- Product publication, spending, paid advertising, account creation, and external communication still require explicit human approval, per the operating model below.
+- **Do not assume any finished products or Virtual Studio assets already exist.** Product production begins from zero unless actual files are found and inspected.
+
+### Channels and first products
+
+- **Shopify is the main Marmalio World multi-industry storefront.** It will initially sell high-margin digital products: ebooks, guides, workbooks, templates, checklists, prompt packs, and document packs, with courses following later.
+- **Amazon KDP** is a separate revenue channel for ebooks, printed guides, and workbooks adapted from suitable Marmalio World products.
+- **Amazon Merch** is a separate revenue channel for themed design collections and print-on-demand products.
+- **Dropshipping** will be introduced through Shopify only after demand, supplier quality, delivery time, returns, full costs, and margin have been verified.
+- **AI tools, micro-apps, subscriptions, and SaaS remain later opportunities**, pursued only after initial product sales and real customer evidence exist.
+
+### On the A11y Evidence example
+
+The A11y Evidence concept researched via the research-market-validation pilot was an external example used to exercise that tool. It is **not** an approved first product and must not become the default Marmalio World direction. The research-market-validation module itself remains a reusable product-selection and evidence-planning tool for whatever real product candidates come next.
+
+### Language
+
+Communication and reports to the owner may be in Polish. Repository documentation follows this repository's existing language and style (English).
+
 ## Business objective
 
 Build a sustainable online business generating 10,000+ EUR net per month, through digital products, courses, AI-powered tools, and e-commerce, with as much repetitive work automated as possible.
