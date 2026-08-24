@@ -1,16 +1,16 @@
 # config/ecosystem.yaml
 # Single source of truth for the Marmalio World ecosystem.
 # Human-readable rationale lives in docs/ARCHITECTURE_V2_2_MULTI_REVENUE.md,
-# docs/COMPLIANCE_GATES_2026.md, AGENTS.md and docs/PROJECT_PLAN.md.
+# docs/COMPLIANCE_GATES_2026.md, docs/KIMI_INTEGRATION_2026.md, AGENTS.md and docs/PROJECT_PLAN.md.
 
-version: 2
+version: 3
 
 operating_model:
   chain:
     - human
     - chatgpt
     - repository-handoff
-    - claude-code-or-assigned-codex
+    - claude-code-or-assigned-codex-or-assigned-kimi
     - specialist-agents
     - qa
     - human-approval
@@ -18,9 +18,29 @@ operating_model:
     human: Sets intent and priorities; gives final approval on publishing, production, spending, account creation, external outreach, destructive actions, and major architecture changes
     chatgpt: Strategic manager and architect; sets direction, priorities, and high-level design decisions
     repository_handoff: Durable specs, decisions, prompts, schemas and audit trail shared across agents
-    claude_code_or_assigned_codex: Claude Code is primary implementation layer; Codex may implement when explicitly assigned
+    claude_code_or_assigned_codex_or_assigned_kimi: Claude Code is primary implementation layer; Codex and Kimi may implement when explicitly assigned non-overlapping files/tasks
     specialist_agents: Execute focused work within research, product building, localization, compliance and QA
     qa: Reviews work before publishing
+
+ai_team:
+  chatgpt:
+    role: manager-architect
+    status: core-now
+  claude-code:
+    role: primary-implementation
+    status: core-now
+  codex:
+    role: independent-repo-review-tests-and-assigned-implementation
+    status: core-now
+  kimi:
+    role: long-context-research-batch-qa-third-opinion-and-assigned-overflow-implementation
+    status: pilot
+    spec: docs/KIMI_INTEGRATION_2026.md
+    rules:
+      - no-duplicate-file-ownership
+      - plan-mode-first-for-review
+      - no-auto-publish-spend-or-account-actions
+      - durable-output-goes-to-repository
 
 revenue_model:
   strategy: multi-revenue
