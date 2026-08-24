@@ -8,12 +8,15 @@ This repository is the durable source of truth for implementation work. Chat ses
 
 Before proposing or changing implementation, read these files in order:
 
-1. `docs/ARCHITECTURE_V2_1_DECISIONS.md`
-2. `docs/PROJECT_PLAN.md`
-3. `CLAUDE.md`
-4. `config/ecosystem.yaml` and any relevant module README/spec for the task
+1. `docs/ARCHITECTURE_V2_2_MULTI_REVENUE.md`
+2. `docs/COMPLIANCE_GATES_2026.md`
+3. `docs/A11Y_EVIDENCE_G1_STATUS.md`
+4. `docs/ARCHITECTURE_V2_1_DECISIONS.md` (historical predecessor; v2.2 wins where they conflict)
+5. `docs/PROJECT_PLAN.md`
+6. `CLAUDE.md`
+7. `config/ecosystem.yaml` and any relevant module README/spec for the task
 
-The architecture decisions dated **2026-08-24** in `docs/ARCHITECTURE_V2_1_DECISIONS.md` supersede older chat assumptions and older repository statements where they conflict.
+The architecture decisions dated **2026-08-24** in `docs/ARCHITECTURE_V2_2_MULTI_REVENUE.md` are the current approved working architecture. Compliance gates are mandatory and cannot be bypassed by an automation or agent.
 
 ### Codex cross-review protocol
 
@@ -24,26 +27,40 @@ When Codex starts a new session on this repository:
 3. Report a short **drift review** with:
    - `MATCH` — what already agrees;
    - `CONFLICT` — what the Codex chat or repo still says differently;
-   - `MISSING` — decisions from the architecture file not represented in the current work;
+   - `MISSING` — decisions from v2.2/compliance not represented in the current work;
    - `NEXT` — the smallest safe next action.
-4. Do **not** silently overwrite a conflicting architectural decision. Surface the conflict first.
-5. Do not execute publishing, spending, account creation, destructive actions, production deployment, or major architecture changes without explicit human approval.
+4. Do **not** silently overwrite a conflicting architectural or compliance decision. Surface the conflict first.
+5. Do not execute publishing, spending, account creation, destructive actions, production deployment, cold outreach, or major architecture changes without explicit human approval.
 
 Codex should act as an independent cross-reviewer and repository assistant unless the human explicitly assigns it implementation ownership for a task. Claude Code remains the primary implementation layer under the current operating model.
 
-### Current commerce/automation constraints
+### Current revenue / commerce / automation constraints
 
-- Validation product: **The AI Productive Prompt Pack**, price target **€10**.
+- Marmalio World runs a **multi-revenue model**: digital products + media/audience + Amazon + affiliate + later physical/dropshipping.
+- Initial digital product: **The AI Productive Prompt Pack**, target price **€10**.
 - Internal product ID: `MW-DIG-000001`.
 - Customer-facing product name must stay clean; do **not** prefix the visible title with the internal ID.
-- **Lemon Squeezy** is the validation-phase commerce system for this digital product.
+- **Lemon Squeezy** is the validation-phase commerce system for digital products.
 - **Shopify** is deferred until physical products/dropshipping or another explicitly approved storefront need is scheduled.
-- Do not build production **Make** scenarios before the revenue gate of **10 real paying customers**.
+- Product production does **not** stop after product #1; build a small premium portfolio (#1–#5) in sequence while maintaining QA.
+- Revenue automation gate `R10` = **10 real paid customer orders across the live digital-product portfolio**, not 10 sales of one product.
+- Do not build production **Make** scenarios before R10 unless the architecture is explicitly re-approved for a named critical workflow.
 - Do not route Lemon Squeezy validation events through Make's community connector. If wiring is needed, prefer Lemon Squeezy's native signed webhooks and repository code.
+- Start audience/content production early (YouTube, Shorts, TikTok, Instagram), with separate rules for general-audience and kids content.
+- Kids content must live in a separate lane/channel and pass the dedicated compliance/quality rules in `COMPLIANCE_GATES_2026.md`.
 - Customer PII must not be copied into Notion, Sheets, Drive, prompts, blueprints, or repository files.
 - Repository-triggered automation belongs in GitHub Actions; business integration/event routing may use Make after the gate.
 - AI-to-AI handoff must be durable: repository specs/files/PRs, not assumptions about one chat reading another chat.
+- A11y Evidence remains on HOLD for public deployment/outreach until the conditions in `docs/A11Y_EVIDENCE_G1_STATUS.md` are satisfied.
+
+### Localization
+
+- Maintain the approved **17-language localization objective**.
+- v2.2 defines a working market-oriented 17-language set and a tiered rollout to avoid delaying every product unnecessarily.
+- If an older exact historical list is discovered in repository assets or prior source files, surface the discrepancy before changing v2.2.
 
 ### Implementation style
 
-Prefer the smallest revenue-supporting change. Keep logic, prompts, schemas, tests, and specs versioned in the repository. Use external automation tools for routing/integration rather than burying business logic inside them.
+Prefer the smallest revenue-supporting change. Keep logic, prompts, schemas, tests, specs, compliance decisions and audit evidence versioned in the repository. Use external automation tools for routing/integration rather than burying business logic inside them.
+
+Never optimize for raw volume at the expense of quality, platform compliance, IP rights, customer experience or long-term account safety.
