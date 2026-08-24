@@ -10,11 +10,13 @@ Before proposing or changing implementation, read these files in order:
 
 1. `docs/ARCHITECTURE_V2_2_MULTI_REVENUE.md`
 2. `docs/COMPLIANCE_GATES_2026.md`
-3. `docs/A11Y_EVIDENCE_G1_STATUS.md`
-4. `docs/ARCHITECTURE_V2_1_DECISIONS.md` (historical predecessor; v2.2 wins where they conflict)
-5. `docs/PROJECT_PLAN.md`
-6. `CLAUDE.md`
-7. `config/ecosystem.yaml` and any relevant module README/spec for the task
+3. `docs/GERMANY_BUSINESS_SETUP_2026.md`
+4. `docs/KIMI_INTEGRATION_2026.md`
+5. `docs/A11Y_EVIDENCE_G1_STATUS.md`
+6. `docs/ARCHITECTURE_V2_1_DECISIONS.md` (historical predecessor; v2.2 wins where they conflict)
+7. `docs/PROJECT_PLAN.md`
+8. `CLAUDE.md`
+9. `config/ecosystem.yaml` and any relevant module README/spec for the task
 
 The architecture decisions dated **2026-08-24** in `docs/ARCHITECTURE_V2_2_MULTI_REVENUE.md` are the current approved working architecture. Compliance gates are mandatory and cannot be bypassed by an automation or agent.
 
@@ -34,6 +36,24 @@ When Codex starts a new session on this repository:
 
 Codex should act as an independent cross-reviewer and repository assistant unless the human explicitly assigns it implementation ownership for a task. Claude Code remains the primary implementation layer under the current operating model.
 
+### AI team ownership
+
+- **ChatGPT** — strategic manager/architect; prioritization and cross-tool decisions.
+- **Claude Code** — primary implementation owner.
+- **Codex** — repository cross-review, tests/QA engineering and explicitly assigned implementation.
+- **Kimi** — pilot agent for long-context review, independent research, batch QA/localization checks, third-opinion review and explicitly assigned overflow implementation.
+
+No two coding agents may edit the same file concurrently. Every implementation task must declare:
+
+- owner;
+- files allowed;
+- files forbidden;
+- dependencies;
+- acceptance criteria;
+- approval requirements.
+
+Kimi-specific rules live in `docs/KIMI_INTEGRATION_2026.md`.
+
 ### Current revenue / commerce / automation constraints
 
 - Marmalio World runs a **multi-revenue model**: digital products + media/audience + Amazon + affiliate + later physical/dropshipping.
@@ -47,7 +67,7 @@ Codex should act as an independent cross-reviewer and repository assistant unles
 - Do not build production **Make** scenarios before R10 unless the architecture is explicitly re-approved for a named critical workflow.
 - Do not route Lemon Squeezy validation events through Make's community connector. If wiring is needed, prefer Lemon Squeezy's native signed webhooks and repository code.
 - Start audience/content production early (YouTube, Shorts, TikTok, Instagram), with separate rules for general-audience and kids content.
-- Kids content must live in a separate lane/channel and pass the dedicated compliance/quality rules in `COMPLIANCE_GATES_2026.md`.
+- Kids content is only one optional lane; do not treat it as the default content direction.
 - Customer PII must not be copied into Notion, Sheets, Drive, prompts, blueprints, or repository files.
 - Repository-triggered automation belongs in GitHub Actions; business integration/event routing may use Make after the gate.
 - AI-to-AI handoff must be durable: repository specs/files/PRs, not assumptions about one chat reading another chat.
