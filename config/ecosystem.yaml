@@ -1,66 +1,148 @@
 # config/ecosystem.yaml
 # Single source of truth for the Marmalio World ecosystem.
-# Human-readable rationale lives in CLAUDE.md and docs/PROJECT_PLAN.md;
-# this file is the structured, queryable counterpart.
+# Human-readable rationale lives in docs/ARCHITECTURE_V2_2_MULTI_REVENUE.md,
+# docs/COMPLIANCE_GATES_2026.md, AGENTS.md and docs/PROJECT_PLAN.md.
 
-version: 1
+version: 2
 
 operating_model:
   chain:
     - human
     - chatgpt
-    - claude-code
+    - repository-handoff
+    - claude-code-or-assigned-codex
     - specialist-agents
     - qa
     - human-approval
   responsibilities:
-    human: Sets intent and priorities; gives final approval on publishing, production, spending, destructive actions, and major architecture changes
+    human: Sets intent and priorities; gives final approval on publishing, production, spending, account creation, external outreach, destructive actions, and major architecture changes
     chatgpt: Strategic manager and architect; sets direction, priorities, and high-level design decisions
-    claude_code: Primary implementation/execution layer; builds and maintains code and repository content
-    specialist_agents: Execute focused work within a role - research, product building, localization, compliance, qa
-    qa: Reviews all work before publishing
+    repository_handoff: Durable specs, decisions, prompts, schemas and audit trail shared across agents
+    claude_code_or_assigned_codex: Claude Code is primary implementation layer; Codex may implement when explicitly assigned
+    specialist_agents: Execute focused work within research, product building, localization, compliance and QA
+    qa: Reviews work before publishing
+
+revenue_model:
+  strategy: multi-revenue
+  gate:
+    id: R10
+    definition: 10 real paid customer orders across the live Marmalio digital-product portfolio
+  engines:
+    - id: digital-products
+      status: core-now
+    - id: media-audience
+      status: core-now
+    - id: amazon-factory
+      status: now
+    - id: affiliate-engine
+      status: now
+    - id: physical-commerce
+      status: later
+    - id: a11y-evidence
+      status: hold
 
 modules:
   - id: product-factory
     name: Product Factory / Digital Product Microfactory
-    status: planned
+    status: now
   - id: content-factory
     name: Content Factory
-    status: planned
+    status: now
   - id: content-intelligence
     name: Content Intelligence / Faceless Growth Engine
-    status: planned
-  - id: micro-app-factory
-    name: Micro-App Factory / App Venture Lab
-    status: planned
-  - id: shopify-integration
-    name: Shopify integration
-    status: planned
+    status: now
+  - id: amazon-factory
+    name: Amazon Factory
+    status: now
+  - id: affiliate-engine
+    name: Affiliate Engine
+    status: now
+  - id: physical-commerce
+    name: Physical Commerce / Shopify Integration
+    status: later
   - id: creative-generation-gateway
     name: Creative Generation Gateway
-    status: planned
+    status: now
   - id: tool-registry
     name: Tool Registry
-    status: planned
+    status: now
   - id: research-market-validation
     name: Research and market validation
     status: pilot
   - id: localization
     name: Localization
-    status: planned
+    status: now
   - id: compliance-qa
     name: Compliance and QA
-    status: planned
+    status: now
+  - id: micro-app-factory
+    name: Micro-App Factory / App Venture Lab
+    status: later
+
+localization:
+  target_languages: 17
+  working_set:
+    - en
+    - de
+    - es
+    - fr
+    - pt
+    - pl
+    - it
+    - nl
+    - ja
+    - ko
+    - ar
+    - tr
+    - id
+    - hi
+    - zh-Hans
+    - sv
+    - cs
+  rollout: tiered
+
+commerce:
+  digital_validation:
+    primary: lemon-squeezy
+    status: core-now
+  shopify:
+    status: deferred
+    reactivate_when:
+      - physical-products
+      - dropshipping
+      - approved-storefront-need
+
+content:
+  channels:
+    - youtube-long
+    - youtube-shorts
+    - tiktok
+    - instagram-reels
+  classes:
+    - sales-content
+    - media-asset
+  kids_lane:
+    status: gated
+    separate_channel_required: true
+    compliance_checklist_required: true
+
+amazon:
+  kdp:
+    status: now-after-compliance
+    ai_generated_disclosure_required_when_platform_requires: true
+  merch:
+    status: now-after-compliance
+    ip_check_required: true
 
 agent_roles:
   - id: research
-    purpose: Market/product/competitor investigation
+    purpose: Market, trend, product and competitor investigation
   - id: product-builder
-    purpose: Turn validated ideas into shippable product work
+    purpose: Turn validated ideas into shippable premium product work
   - id: localization
-    purpose: Adapt content/products for other languages and markets
+    purpose: Adapt products/content across languages and markets
   - id: compliance
-    purpose: Legal, platform-policy, and licensing checks
+    purpose: Legal, platform-policy, licensing, privacy and safety checks
   - id: qa
     purpose: Quality assurance and review before publishing
 
@@ -73,43 +155,64 @@ approval_required:
   - publishing
   - production-deployment
   - spending
+  - account-creation
+  - cold-outreach
   - destructive-actions
   - major-architectural-change
+  - regulated-physical-products
+
+privacy:
+  customer_pii_allowed_systems:
+    - approved-commerce-system
+    - approved-correspondence-system
+  forbidden_destinations:
+    - github
+    - notion
+    - google-drive
+    - generic-ai-prompts
+    - make-blueprints
+    - generic-logs
 
 channels:
-  primary: shopify
-  expansion:
+  core_now:
+    - lemon-squeezy
+    - youtube
+    - tiktok
+    - instagram
     - amazon-kdp
     - amazon-merch
-    - etsy
-    - gumroad
-    - lemon-squeezy
-    - social-platforms
+    - affiliate
+  later:
+    - shopify-physical
+    - dropshipping
 
-tools:
-  claude_ecosystem:
-    - id: claude-code
-      status: core-now
-    - id: claude-code-setup
-      status: core-now
-    - id: claude-mem
-      status: pilot
-    - id: task-observer
-      status: pilot
-    - id: book-to-skill
-      status: later-pilot
-    - id: omniroute
-      status: later
-  external_review_required:
-    - security
-    - licensing
-    - maintenance-status
-    - functional-duplication
-  preference: small-high-quality-toolset
+automation:
+  pre_R10:
+    make_production_dependency: false
+  post_R10:
+    make_role:
+      - cross-saas-routing
+      - mapping
+      - retries
+      - notifications
+  github_actions_role:
+    - repo-triggered-automation
+    - tests
+    - release-workflows
+  business_logic_location: repository
+
+compliance:
+  master_file: docs/COMPLIANCE_GATES_2026.md
+  a11y_status_file: docs/A11Y_EVIDENCE_G1_STATUS.md
+  mandatory_before_launch: true
 
 principles:
-  - work-incrementally
-  - inspect-before-major-implementation
+  - revenue-first
+  - premium-over-volume
+  - multi-revenue-but-controlled
+  - trend-informed-not-hype-driven
+  - localize-winners
   - keep-docs-in-sync
-  - never-expose-secrets
+  - never-expose-secrets-or-customer-pii
   - validate-external-claims-before-treating-as-fact
+  - human-approval-for-high-impact-actions
